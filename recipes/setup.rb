@@ -15,10 +15,16 @@ end
 %w(
   gdal-bin
   imposm
+  libjpeg-dev
+  python-dev
+  python-pip
   zip
 ).each do |p|
   package p
 end
+
+python_pip 'Image'
+python_pip 'ModestMaps'
 
 # scripts
 #
@@ -43,6 +49,16 @@ cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.style" do
   source  'osm2pgsql.style'
 end
 
+cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.txt" do
+  owner   node[:metroextractor][:user][:id]
+  source  'cities.txt'
+end
+
+cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/compose-city-previews.py" do
+  owner   node[:metroextractor][:user][:id]
+  source  'compose-city-previews.py'
+end
+
 # directories for extracts and logs
 #
 directory "#{node[:metroextractor][:setup][:basedir]}/ex" do
@@ -56,5 +72,11 @@ end
 # directories for shapes
 #
 directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
+  owner node[:metroextractor][:user][:id]
+end
+
+# directories for city previews
+#
+directory "#{node[:metroextractor][:setup][:basedir]}/previews" do
   owner node[:metroextractor][:user][:id]
 end

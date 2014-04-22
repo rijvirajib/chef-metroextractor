@@ -28,10 +28,22 @@ describe 'metroextractor::setup' do
   %w(
     gdal-bin
     imposm
+    libjpeg-dev
+    python-dev
+    python-pip
+    zip
   ).each do |p|
     it 'should install gdal-bin' do
       chef_run.should install_package p
     end
+  end
+
+  it 'should python_pip install Image' do
+    chef_run.should install_python_pip 'Image'
+  end
+
+  it 'should python_pip install ModestMaps' do
+    chef_run.should install_python_pip 'ModestMaps'
   end
 
   it 'should create the directory /opt/metroextractor-scripts' do
@@ -58,11 +70,31 @@ describe 'metroextractor::setup' do
     )
   end
 
+  it 'should create the file /opt/metroextractor-scripts/cities.txt' do
+    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/cities.txt').with(
+      source: 'cities.txt'
+    )
+  end
+
+  it 'should create the file /opt/metroextractor-scripts/compose-city-previews.py' do
+    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/compose-city-previews.py').with(
+      source: 'compose-city-previews.py'
+    )
+  end
+
   it 'should create /mnt/metro/ex' do
     chef_run.should create_directory '/mnt/metro/ex'
   end
 
   it 'should create /mnt/metro/logs' do
     chef_run.should create_directory '/mnt/metro/logs'
+  end
+
+  it 'should create /mnt/metro/shp' do
+    chef_run.should create_directory '/mnt/metro/shp'
+  end
+
+  it 'should create /mnt/metro/previews' do
+    chef_run.should create_directory '/mnt/metro/previews'
   end
 end

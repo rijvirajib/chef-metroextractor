@@ -11,6 +11,7 @@
   metroextractor::planet
   metroextractor::extracts
   metroextractor::shapes
+  metroextractor::previews
 ).each do |r|
   include_recipe r
 end

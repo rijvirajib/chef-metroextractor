@@ -35,6 +35,9 @@ default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRat
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
 default[:metroextractor][:shapes][:osm2pgsql_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock"
 
+# previews
+default[:metroextractor][:previews][:lock] = "#{node[:metroextractor][:setup][:basedir]}/.previews.lock"
+
 # osmosis
 default[:osmosis][:symlink]      = true
 default[:osmosis][:install_type] = 'tgz'

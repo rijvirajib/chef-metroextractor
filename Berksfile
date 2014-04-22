@@ -1,6 +1,7 @@
 metadata
 
 cookbook 'apt'
+cookbook 'python'
 cookbook 'user'
 
 cookbook 'osm2pgsql'  , github: 'mapzen/chef-osm2pgsql'

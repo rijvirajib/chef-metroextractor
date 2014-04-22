@@ -13,6 +13,7 @@ recipe 'metroextractor', 'Builds metro extracts'
   osm2pgsql
   osmosis
   postgresql
+  python
   user
 ).each do |dep|
   depends dep
