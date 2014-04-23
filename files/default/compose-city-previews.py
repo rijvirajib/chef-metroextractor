@@ -37,7 +37,7 @@ for city in cities:
     south, east = float(city['bottom']), float(city['right'])
 
     mmap = mapByExtent(provider, Location(north, west), Location(south, east), dimensions)
-    
+
     ul = mmap.locationPoint(Location(north, west))
     lr = mmap.locationPoint(Location(south, east))
     bbox = [(p.x, p.y) for p in (ul, lr)]
@@ -47,11 +47,11 @@ for city in cities:
     mask = Image.new('L', img.size, 0x99)
     ImageDraw(mask).rectangle(bbox, fill=0x00)
     img.paste((0xFF, 0xFF, 0xFF), (0, 0), mask)
-    
+
     frame = Image.new('L', img.size, 0x00)
     ImageDraw(frame).rectangle(bbox, outline=0x33)
     img.paste((0x00, 0x00, 0x00), (0, 0), frame)
-    
+
     img.save('%s/%s.jpg' % (previews, city['slug']), quality=95)
 
     print >> stderr, '%s/%s.jpg' % (previews, city['slug'])
