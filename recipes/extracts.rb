@@ -3,18 +3,17 @@
 # Recipe:: extracts
 #
 
-file "#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock" do
+file "#{node[:metroextractor][:setup][:basedir]}/.extracts.lock" do
   action :nothing
 end
 
-bash 'osmosis' do
+bash 'create extracts' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
-  environment('JAVACMD_OPTIONS' => node[:metroextractor][:extracts][:osmosis_jvmopts])
   code <<-EOH
-    parallel -a #{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh -d ';' --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmosis.log
+    parallel -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh -d ';' --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
   EOH
-  timeout   node[:metroextractor][:extracts][:osmosis_timeout]
-  notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
-  not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock") }
+  timeout   node[:metroextractor][:extracts][:extracts_timeout]
+  notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.extracts.lock]", :immediately
+  not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.extracts.lock") }
 end

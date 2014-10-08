@@ -40,16 +40,9 @@ default[:metroextractor][:planet][:url]               = 'http://planet.openstree
 default[:metroextractor][:planet][:file]              = node[:metroextractor][:planet][:url].split('/').last
 
 # extracts
-default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
-
-# set osmosis heap (per process!!!)
-heap                                                  = '4G'
-default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
+default[:metroextractor][:extracts][:extracts_timeout] = 172_800
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]       = 12
 default[:metroextractor][:shapes][:osm2pgsql_jobs]    = 8
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
-
-# osmosis
-default[:osmosis][:install_type]                      = 'tgz'

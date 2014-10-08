@@ -5,7 +5,6 @@
 
 %w(
   osm2pgsql::default
-  osmosis::default
 ).each do |r|
   include_recipe r
 end
@@ -31,6 +30,7 @@ end
   protobuf-compiler
   python-dev
   python-pip
+  zlib1g-dev
 ).each do |p|
   package p do
     action :install
@@ -79,9 +79,9 @@ end
 
 # scripts
 #
-template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
+template "#{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh" do
   owner   node[:metroextractor][:user][:id]
-  source  'osmosis.sh.erb'
+  source  'extracts.sh.erb'
   mode    0755
 end
 
