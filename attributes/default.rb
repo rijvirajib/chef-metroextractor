@@ -43,11 +43,9 @@ default[:metroextractor][:planet][:file]               = node[:metroextractor][:
 default[:metroextractor][:extracts][:extracts_timeout] = 172_800
 
 # vex
-default[:metroextractor][:vex][:url]                   = 'https://github.com/conveyal/vanilla-extract.git'
 default[:metroextractor][:vex][:version]               = '0.0.1'
-default[:metroextractor][:vex][:owner]                 = 'root'
+default[:metroextractor][:vex][:url]                   = "https://github.com/conveyal/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 default[:metroextractor][:vex][:basedir]               = '/usr/local'
-default[:metroextractor][:vex][:db_dir]                = "#{node[:metroextractor][:setup][:basedir]}/vex_db"
 default[:metroextractor][:vex][:jobs]                  = node[:cpu][:total]
 
 # shapes

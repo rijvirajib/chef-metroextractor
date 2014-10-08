@@ -18,15 +18,14 @@ describe 'metroextractor::extracts' do
   end
 
   it 'should define the lockfile' do
-    expect(chef_run).to_not create_file '/mnt/metro/.osmosis.lock'
+    expect(chef_run).to_not create_file '/mnt/metro/.extracts.lock'
   end
 
-  it 'should run osmosis' do
-    expect(chef_run).to run_bash('osmosis').with(
+  it 'should run extracts' do
+    expect(chef_run).to run_bash('create extracts').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms4G -Xmx4G' },
-      code:         "    parallel -a /opt/metroextractor-scripts/osmosis.sh -d ';' --joblog /mnt/metro/logs/parallel_osmosis.log\n",
+      code:         "    parallel --jobs 1 -a /opt/metroextractor-scripts/extracts.sh -d ';' --joblog /mnt/metro/logs/parallel_extracts.log\n",
       timeout:      172_800
     )
   end

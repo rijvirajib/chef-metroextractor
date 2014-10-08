@@ -57,6 +57,17 @@ ark 'imposm3' do
   only_if       { node[:metroextractor][:imposm][:major_version] == 'imposm3' }
 end
 
+# vex
+#
+ark 'vex' do
+  url               node[:metroextractor][:vex][:url]
+  version           node[:metroextractor][:vex][:version]
+  prefix_root       node[:metroextractor][:vex][:basedir]
+  owner             'root'
+  has_binaries      ['vex']
+  strip_components  0
+end
+
 # scripts basedir
 #
 directory node[:metroextractor][:setup][:scriptsdir] do
@@ -103,18 +114,10 @@ cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/merge-geojson.py" d
   mode    0755
 end
 
-# directories for extracts and logs
+# directories
 #
-directory "#{node[:metroextractor][:setup][:basedir]}/ex" do
-  owner node[:metroextractor][:user][:id]
-end
-
-directory "#{node[:metroextractor][:setup][:basedir]}/logs" do
-  owner node[:metroextractor][:user][:id]
-end
-
-# directories for shapes
-#
-directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
-  owner node[:metroextractor][:user][:id]
+%w(ex shp logs vexdb).each do |d|
+  directory "#{node[:metroextractor][:setup][:basedir]}/#{d}" do
+    owner node[:metroextractor][:user][:id]
+  end
 end
