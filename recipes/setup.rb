@@ -67,7 +67,6 @@ ark 'vex' do
   prefix_root       node[:metroextractor][:vex][:basedir]
   owner             'root'
   has_binaries      ['vex']
-  strip_components  0
 end
 
 # scripts basedir

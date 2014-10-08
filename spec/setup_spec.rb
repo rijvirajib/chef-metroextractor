@@ -198,12 +198,11 @@ describe 'metroextractor::setup' do
 
   it 'should use ark to install vex' do
     expect(chef_run).to install_with_make_ark('vex').with(
-      url:              'http://planet.us-east-1.mapzen.com/vanilla-extract.tar.gz',
+      url:              'https://github.com/heffergm/vanilla-extract/archive/0.0.1.tar.gz',
       version:          '0.0.1',
       prefix_root:      '/usr/local',
       owner:            'root',
-      has_binaries:     ['vex'],
-      strip_components: 0
+      has_binaries:     ['vex']
     )
   end
 

@@ -44,8 +44,7 @@ default[:metroextractor][:extracts][:extracts_timeout] = 172_800
 
 # vex
 default[:metroextractor][:vex][:version]               = '0.0.1'
-# default[:metroextractor][:vex][:url]                   = "https://github.com/conveyal/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
-default[:metroextractor][:vex][:url]                   = 'http://s3.amazonaws.com/mapzen.software/vanilla-extract.tar.gz'
+default[:metroextractor][:vex][:url]                   = "https://github.com/heffergm/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 default[:metroextractor][:vex][:basedir]               = '/usr/local'
 default[:metroextractor][:vex][:jobs]                  = node[:cpu][:total]
 
