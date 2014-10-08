@@ -23,6 +23,7 @@ describe 'metroextractor::setup' do
     %w(
       build-essential
       gdal-bin
+      git
       parallel
       zip
     ).each do |p|
@@ -196,8 +197,8 @@ describe 'metroextractor::setup' do
   end
 
   it 'should use ark to install vex' do
-    expect(chef_run).to install_ark('vex').with(
-      url:              'https://github.com/conveyal/vanilla-extract/archive/0.0.1.tar.gz',
+    expect(chef_run).to install_with_make_ark('vex').with(
+      url:              'http://planet.us-east-1.mapzen.com/vanilla-extract.tar.gz',
       version:          '0.0.1',
       prefix_root:      '/usr/local',
       owner:            'root',

@@ -12,6 +12,7 @@ end
 # packages for 12.04 and 14.04
 #
 %w(
+  git
   build-essential
   gdal-bin
   parallel
@@ -60,6 +61,7 @@ end
 # vex
 #
 ark 'vex' do
+  action            [:install_with_make]
   url               node[:metroextractor][:vex][:url]
   version           node[:metroextractor][:vex][:version]
   prefix_root       node[:metroextractor][:vex][:basedir]
