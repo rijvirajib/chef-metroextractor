@@ -101,9 +101,9 @@ template "#{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh" do
   mode    0755
 end
 
-template "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.sh" do
+template "#{node[:metroextractor][:setup][:scriptsdir]}/shapes.sh" do
   owner   node[:metroextractor][:user][:id]
-  source  'osm2pgsql.sh.erb'
+  source  'shapes.sh.erb'
   mode    0755
 end
 
