@@ -158,11 +158,11 @@ describe 'metroextractor::setup' do
     )
   end
 
-  it 'should create template /opt/metroextractor-scripts/osm2pgsql.sh' do
-    expect(chef_run).to create_template('/opt/metroextractor-scripts/osm2pgsql.sh').with(
+  it 'should create template /opt/metroextractor-scripts/shapes.sh' do
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/shapes.sh').with(
       owner:  'metro',
       mode:   0755,
-      source: 'osm2pgsql.sh.erb'
+      source: 'shapes.sh.erb'
     )
   end
 
@@ -197,13 +197,17 @@ describe 'metroextractor::setup' do
   end
 
   it 'should use ark to install vex' do
-    expect(chef_run).to install_with_make_ark('vex').with(
+    expect(chef_run).to install_ark('vex').with(
       url:              'https://github.com/heffergm/vanilla-extract/archive/0.0.1.tar.gz',
       version:          '0.0.1',
       prefix_root:      '/usr/local',
       owner:            'root',
       has_binaries:     ['vex']
     )
+  end
+
+  it 'should define the build task for vex' do
+    expect(chef_run).to_not run_execute 'build vex'
   end
 
 end

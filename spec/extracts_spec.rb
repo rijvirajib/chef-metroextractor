@@ -17,7 +17,20 @@ describe 'metroextractor::extracts' do
     end.converge(described_recipe)
   end
 
-  it 'should define the lockfile' do
+  it 'should define the vexdb lockfile' do
+    expect(chef_run).to_not create_file '/mnt/metro/.vexdb.lock'
+  end
+
+  it 'should create vexdb' do
+    expect(chef_run).to run_bash('create vexdb').with(
+      user:     'metro',
+      cwd:      '/mnt/metro',
+      timeout:  7200,
+      code:     "    vex /mnt/metro/vexdb /mnt/metro/planet-latest.osm.pbf >/mnt/metro/logs/create_vexdb.log 2>&1\n"
+    )
+  end
+
+  it 'should define the extracts lockfile' do
     expect(chef_run).to_not create_file '/mnt/metro/.extracts.lock'
   end
 

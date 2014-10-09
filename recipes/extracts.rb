@@ -14,7 +14,7 @@ bash 'create vexdb' do
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.vexdb.lock]", :immediately
   not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.vexdb.lock") }
   code <<-EOH
-    vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log
+    vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
   EOH
 end
 

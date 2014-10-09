@@ -18,14 +18,14 @@ describe 'metroextractor::shapes' do
   end
 
   it 'should define the lockfile' do
-    expect(chef_run).to_not create_file '/mnt/metro/.osm2pgsql.lock'
+    expect(chef_run).to_not create_file '/mnt/metro/.shapes.lock'
   end
 
-  it 'should run osm2pgsql' do
-    expect(chef_run).to run_execute('osm2pgsql').with(
+  it 'should run shapes' do
+    expect(chef_run).to run_execute('create shapes').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      command:      '/opt/metroextractor-scripts/osm2pgsql.sh',
+      command:      '/opt/metroextractor-scripts/shapes.sh',
       timeout:      172_800
     )
   end

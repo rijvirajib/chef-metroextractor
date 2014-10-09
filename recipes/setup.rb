@@ -70,6 +70,7 @@ ark 'vex' do
 end
 
 execute 'build vex' do
+  action  :nothing
   cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
   command 'make'
 end
