@@ -119,6 +119,7 @@ end
 #
 %w(ex shp logs vexdb).each do |d|
   directory "#{node[:metroextractor][:setup][:basedir]}/#{d}" do
-    owner node[:metroextractor][:user][:id]
+    recursive true
+    owner     node[:metroextractor][:user][:id]
   end
 end
