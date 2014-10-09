@@ -11,7 +11,7 @@ bash 'create extracts' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
   code <<-EOH
-    parallel --jobs #{node[:metroextractor][:vex][:jobs]} -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh -d ';' --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
+    parallel --jobs #{node[:metroextractor][:vex][:jobs]} -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
   EOH
   timeout   node[:metroextractor][:extracts][:extracts_timeout]
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.extracts.lock]", :immediately
