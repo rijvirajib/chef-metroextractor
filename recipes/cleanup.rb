@@ -8,7 +8,7 @@
 #
 
 %w(ex shp logs).each do |dir|
-  execute 'purge extracts' do
+  execute "purge #{node[:metroextractor][:setup][:basedir]}/#{dir}" do
     command "rm -rf #{node[:metroextractor][:setup][:basedir]}/#{dir}/*"
   end
 end
