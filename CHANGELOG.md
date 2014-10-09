@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.14.0
+------
+* replace osmosis with vex
+
 0.13.8
 ------
 * replace remote_file for planet download with wget: remote_file is too slow and flaky for files this large
