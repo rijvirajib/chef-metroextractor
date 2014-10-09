@@ -38,7 +38,7 @@ describe 'metroextractor::extracts' do
     expect(chef_run).to run_bash('create extracts').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      code:         "    parallel --jobs 1 -a /opt/metroextractor-scripts/extracts.sh --joblog /mnt/metro/logs/parallel_extracts.log\n",
+      code:         "    parallel --jobs 12 -a /opt/metroextractor-scripts/extracts.sh --joblog /mnt/metro/logs/parallel_extracts.log\n",
       timeout:      172_800
     )
   end
