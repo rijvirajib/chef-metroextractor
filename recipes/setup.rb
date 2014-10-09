@@ -125,6 +125,7 @@ end
 directory node[:metroextractor][:vex][:db] do
   recursive true
   owner     node[:metroextractor][:user][:id]
+  not_if    { node[:metroextractor][:vex][:db] == 'memory' }
 end
 
 %w(ex shp logs).each do |d|

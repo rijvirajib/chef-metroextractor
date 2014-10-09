@@ -192,8 +192,8 @@ describe 'metroextractor::setup' do
     expect(chef_run).to create_directory '/mnt/metro/shp'
   end
 
-  it 'should create /mnt/metro/vexdb' do
-    expect(chef_run).to create_directory '/mnt/metro/vexdb'
+  it 'should not create /mnt/metro/vexdb if we are not using memory' do
+    expect(chef_run).to_not create_directory 'memory'
   end
 
   it 'should use ark to install vex' do

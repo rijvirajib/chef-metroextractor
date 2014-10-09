@@ -26,7 +26,7 @@ describe 'metroextractor::extracts' do
       user:     'metro',
       cwd:      '/mnt/metro',
       timeout:  7200,
-      code:     "    vex /mnt/metro/vexdb /mnt/metro/planet-latest.osm.pbf >/mnt/metro/logs/create_vexdb.log 2>&1\n"
+      code:     "    vex memory /mnt/metro/planet-latest.osm.pbf >/mnt/metro/logs/create_vexdb.log 2>&1\n"
     )
   end
 
@@ -38,7 +38,7 @@ describe 'metroextractor::extracts' do
     expect(chef_run).to run_bash('create extracts').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      code:         "    parallel --jobs 12 -a /opt/metroextractor-scripts/extracts.sh --joblog /mnt/metro/logs/parallel_extracts.log\n",
+      code:         "    parallel --jobs 1 -a /opt/metroextractor-scripts/extracts.sh --joblog /mnt/metro/logs/parallel_extracts.log\n",
       timeout:      172_800
     )
   end
