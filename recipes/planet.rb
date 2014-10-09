@@ -11,7 +11,7 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 #   a pbf data file
 fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
-remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
+remote_file "#{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
   action    :create
   backup    false
   source    "#{node[:metroextractor][:planet][:url]}.md5"
@@ -22,7 +22,7 @@ end
 
 execute 'download planet' do
   action  :nothing
-  command "wget --quiet -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}"
+  command "wget --quiet -O #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}"
   user    node[:metroextractor][:user][:id]
 end
 
@@ -32,8 +32,8 @@ ruby_block 'verify md5' do
   block do
     require 'digest'
 
-    planet_md5  = Digest::MD5.file("#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}").hexdigest
-    md5         = File.read("#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5").split(' ').first
+    planet_md5  = Digest::MD5.file("#{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]}").hexdigest
+    md5         = File.read("#{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5").split(' ').first
 
     if planet_md5 != md5
       Chef::Log.info('Failure: the md5 of the planet we downloaded does not appear to be correct. Aborting.')

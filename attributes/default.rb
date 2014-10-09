@@ -36,6 +36,7 @@ default[:postgresql][:checkpoint_segments]             = '50'
 default[:postgresql][:max_connections]                 = '200'
 
 # planet
+default[:metroextractor][:planet][:basedir]            = node[:metroextractor][:setup][:basedir]
 default[:metroextractor][:planet][:url]                = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
 default[:metroextractor][:planet][:file]               = node[:metroextractor][:planet][:url].split('/').last
 
@@ -47,6 +48,8 @@ default[:metroextractor][:vex][:version]               = '0.0.1'
 default[:metroextractor][:vex][:url]                   = "https://github.com/heffergm/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 default[:metroextractor][:vex][:basedir]               = '/usr/local'
 default[:metroextractor][:vex][:jobs]                  = node[:cpu][:total]
+default[:metroextractor][:vex][:db]                    = "#{node[:metroextractor][:setup][:basedir]}/vexdb"
+default[:metroextractor][:vex][:db_timeout]            = 7200
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]        = 12

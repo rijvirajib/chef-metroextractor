@@ -82,7 +82,6 @@ git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
   repository  node[:metroextractor][:setup][:cities_repo]
   revision    node[:metroextractor][:setup][:cities_branch]
   user        node[:metroextractor][:user][:id]
-  not_if      { ::File.directory?("#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities") }
 end
 
 link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
@@ -117,7 +116,12 @@ end
 
 # directories
 #
-%w(ex shp logs vexdb).each do |d|
+directory node[:metroextractor][:vex][:db] do
+  recursive true
+  owner     node[:metroextractor][:user][:id]
+end
+
+%w(ex shp logs).each do |d|
   directory "#{node[:metroextractor][:setup][:basedir]}/#{d}" do
     recursive true
     owner     node[:metroextractor][:user][:id]
