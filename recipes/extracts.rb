@@ -8,7 +8,6 @@ bash 'create vexdb' do
   cwd     node[:metroextractor][:setup][:basedir]
   timeout node[:metroextractor][:vex][:db_timeout]
   code <<-EOH
-    rm -rf #{node[:metroextractor][:vex][:db]}/*
     vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]}
   EOH
 end
