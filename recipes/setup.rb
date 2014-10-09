@@ -61,12 +61,17 @@ end
 # vex
 #
 ark 'vex' do
-  action            [:install_with_make]
-  url               node[:metroextractor][:vex][:url]
-  version           node[:metroextractor][:vex][:version]
-  prefix_root       node[:metroextractor][:vex][:basedir]
-  owner             'root'
-  has_binaries      ['vex']
+  owner        'root'
+  url          node[:metroextractor][:vex][:url]
+  version      node[:metroextractor][:vex][:version]
+  prefix_root  node[:metroextractor][:vex][:installdir]
+  has_binaries ['vex']
+  notifies     :run, 'execute[build vex]', :immediately
+end
+
+execute 'build vex' do
+  cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
+  command 'make'
 end
 
 # scripts basedir
