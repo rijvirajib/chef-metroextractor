@@ -7,8 +7,13 @@ file "#{node[:metroextractor][:setup][:basedir]}/.vexdb.lock" do
   action :nothing
 end
 
+if node[:metroextractor][:vex][:db] == 'memory'
+  setuser = 'root'
+else
+  setuser = node[:metroextractor][:user][:id]
+end
 bash 'create vexdb' do
-  user      node[:metroextractor][:user][:id]
+  user      setuser
   cwd       node[:metroextractor][:setup][:basedir]
   timeout   node[:metroextractor][:vex][:db_timeout]
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.vexdb.lock]", :immediately
