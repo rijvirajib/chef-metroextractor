@@ -15,6 +15,7 @@ end
 
 execute 'purge vexdb' do
   command "rm -rf #{node[:metroextractor][:vex][:db]}/*"
+  not_if { node[:metroextractor][:vex][:db] == 'memory' }
 end
 
 %w(.shapes.lock .extracts.lock .vexdb.lock).each do |lockfile|
