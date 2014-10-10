@@ -23,7 +23,7 @@ describe 'metroextractor::extracts' do
 
   it 'should create vexdb' do
     expect(chef_run).to run_bash('create vexdb').with(
-      user:     'metro',
+      user:     'root',
       cwd:      '/mnt/metro',
       timeout:  7200,
       code:     "    vex memory /mnt/metro/planet-latest.osm.pbf >/mnt/metro/logs/create_vexdb.log 2>&1\n"
