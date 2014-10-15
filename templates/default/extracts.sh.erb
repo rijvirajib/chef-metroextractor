@@ -3,6 +3,6 @@
 <% data = JSON.parse(json) -%>
 <% data['regions'].each do |region, val| -%>
   <% val['cities'].each do |city, val| %>
-vex <%= node[:metroextractor][:vex][:db] %> "<%= val['bbox']['bottom'] %>" "<%= val['bbox']['left'] %>" "<%= val['bbox']['top'] %>" "<%= val['bbox']['right'] %>" -out ex/<%= city %>.osm.pbf
+vex <%= node[:metroextractor][:vex][:db] %> "<%= val['bbox']['bottom'] %>" "<%= val['bbox']['left'] %>" "<%= val['bbox']['top'] %>" "<%= val['bbox']['right'] %>" ex/<%= city %>.osm.pbf
   <% end %>
 <% end %>
