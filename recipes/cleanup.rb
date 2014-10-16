@@ -23,3 +23,7 @@ end
     action :delete
   end
 end
+
+pg_database node[:metroextractor][:postgres][:db] do
+  action :drop
+end
