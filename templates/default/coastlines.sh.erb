@@ -14,7 +14,7 @@ function package_coast
   if [ ${size} -gt 4 ]; then
     zip -j - coast/${slug}_coast.??? > coast/${slug}.coastline.zip
   else
-    echo "Size not > 4, skipping"
+    echo "Size not > 4, skipping ${slug}"
   fi
 
   rm coast/${slug}_coast.*
