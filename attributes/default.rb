@@ -56,4 +56,6 @@ default[:osmosis][:install_type]                      = 'tgz'
 
 # coastlines
 default[:coastlines][:water_polygons][:url]           = 'http://data.openstreetmapdata.com/coastlines-split-4326.zip'
+default[:coastlines][:land_polygons][:url]            = 'http://data.openstreetmapdata.com/land-polygons-split-4326.zip'
 default[:coastlines][:water_polygons][:file]          = node[:coastlines][:water_polygons][:url].split('/').last
+default[:coastlines][:land_polygons][:file]           = node[:coastlines][:land_polygons][:url].split('/').last

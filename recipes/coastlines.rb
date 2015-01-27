@@ -15,6 +15,14 @@ bash 'wget water polygons' do
   EOH
 end
 
+bash 'wget land polygons' do
+  user node[:metroextractor][:user][:id]
+  cwd  node[:metroextractor][:setup][:basedir]
+  code <<-EOH
+    wget #{node[:coastlines][:land_polygons][:url]} && unzip #{node[:coastlines][:land_polygons][:file]}
+  EOH
+end
+
 bash 'generate coastlines' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
