@@ -19,12 +19,12 @@ function package_coast
 
     zip -j - coast/${slug}_water_coast.??? > coast/${slug}_water.coastline.zip
     zip -j - coast/${slug}_land_coast.??? > coast/${slug}_land.coastline.zip
-
-    rm coast/${slug}_land_coast.*
-    rm coast/${slug}_water_coast.*
   else
     echo "Size not > 4, skipping ${slug}_water"
   fi
+
+  rm coast/${slug}_land_coast.*
+  rm coast/${slug}_water_coast.*
 }
 
 <% require 'json' -%>
