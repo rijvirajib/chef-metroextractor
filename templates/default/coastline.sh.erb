@@ -1,0 +1,32 @@
+#!/bin/bash -x
+#
+
+function package_coast
+{
+ slug=$1
+ top=$2
+ left=$3
+ bottom=$4
+ right=$5
+
+  ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_coast.shp water-polygons-split-4326/water_polygons.shp
+  size=$(du -sk coast/${slug}_coast.shp | awk '{print $1}')
+  if [ ${size} -gt 4 ]; then
+    zip -j - coast/${slug}_coast.??? > coast/${slug}.coastline.zip
+  else
+    echo "Size not > 4, skipping"
+  fi
+
+  rm coast/${slug}_coast.*
+}
+
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) -%>
+<% data['regions'].each do |region, val| -%>
+  <% val['cities'].each do |city, v| %>
+
+package_coast <%= city %> "<%= v['bbox']['top'] %>" "<%= v['bbox']['left'] %>" "<%= v['bbox']['bottom'] %>" "<%= v['bbox']['right'] %>"
+
+  <% end %>
+<% end %>

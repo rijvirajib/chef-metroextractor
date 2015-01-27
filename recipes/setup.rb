@@ -91,6 +91,12 @@ template "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.sh" do
   mode    0755
 end
 
+template "#{node[:metroextractor][:setup][:scriptsdir]}/coastlines.sh" do
+  owner   node[:metroextractor][:user][:id]
+  source  'coastlines.sh.erb'
+  mode    0755
+end
+
 cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.style" do
   owner   node[:metroextractor][:user][:id]
   source  'osm2pgsql.style'
@@ -116,5 +122,11 @@ end
 # directories for shapes
 #
 directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
+  owner node[:metroextractor][:user][:id]
+end
+
+# directories for coastlines
+#
+directory "#{node[:metroextractor][:setup][:basedir]}/coast" do
   owner node[:metroextractor][:user][:id]
 end
