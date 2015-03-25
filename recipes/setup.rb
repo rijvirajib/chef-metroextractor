@@ -72,7 +72,7 @@ end
 execute 'build vex' do
   action  :nothing
   cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
-  command 'make'
+  command "make -j#{node[:cpu][:total]}"
 end
 
 # scripts basedir
