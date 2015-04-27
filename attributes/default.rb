@@ -45,7 +45,7 @@ default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
 
 # set osmosis heap (per process!!!)
-heap                                                  = '8G'
+heap                                                  = '15G'
 default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
 
 # shapes
