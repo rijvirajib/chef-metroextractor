@@ -6,7 +6,6 @@
 package 'osmctools'
 
 execute 'update planet' do
-  action  :nothing
   user    node[:metroextractor][:user][:id]
   cwd     node[:metroextractor][:setup][:basedir]
   command <<-EOH

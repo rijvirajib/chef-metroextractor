@@ -3,8 +3,6 @@
 # Recipe:: planet
 #
 
-include_recipe 'metroextractor::planet_update' if node[:metroextractor][:planet][:update] == true
-
 # override tempfile location so the planet download
 #   temp file goes somewhere with enough space
 ENV['TMP'] = node[:metroextractor][:setup][:basedir]
@@ -20,7 +18,6 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   mode      0644
   notifies  :run, 'execute[download planet]', :immediately
   notifies  :run, 'ruby_block[verify md5]',   :immediately
-  notifies  :run, 'execute[update planet]',   :immediately if node[:metroextractor][:planet][:update] == true
 end
 
 execute 'download planet' do
@@ -44,3 +41,5 @@ ruby_block 'verify md5' do
     end
   end
 end
+
+include_recipe 'metroextractor::planet_update' if node[:metroextractor][:planet][:update] == true
