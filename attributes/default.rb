@@ -47,20 +47,17 @@ default[:metroextractor][:planet][:update]            = false  # whether to upda
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
-default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
-default[:metroextractor][:extracts][:osmosis_jobs]    = 6
+default[:metroextractor][:extracts][:osmconvert_timeout] = 172_800
+default[:metroextractor][:extracts][:osmconvert_jobs]    = node[:cpu][:total]
 
-# set osmosis heap (per process!!!)
-default[:metroextractor][:extracts][:osmosis_heap]    = '15G'
-default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{node[:metroextractor][:extracts][:osmosis_heap]} -Xmx#{node[:metroextractor][:extracts][:osmosis_heap]}"
+# set osmconvert heap (per process!!!)
+default[:metroextractor][:extracts][:osmconvert_heap]    = '15G'
+default[:metroextractor][:extracts][:osmconvert_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{node[:metroextractor][:extracts][:osmconvert_heap]} -Xmx#{node[:metroextractor][:extracts][:osmconvert_heap]}"
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]       = 12
 default[:metroextractor][:shapes][:osm2pgsql_jobs]    = 8
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
-
-# osmosis
-default[:osmosis][:install_type]                      = 'tgz'
 
 # coastlines
 default[:coastlines][:generate][:timeout]             = 7_200

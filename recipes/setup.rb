@@ -3,12 +3,7 @@
 # Recipe:: setup
 #
 
-%w(
-  osm2pgsql::default
-  osmosis::default
-).each do |r|
-  include_recipe r
-end
+include_recipe 'osm2pgsql::default'
 
 # packages for 12.04 and 14.04
 #
@@ -16,6 +11,7 @@ end
   build-essential
   gdal-bin
   parallel
+  osmctools
   zip
   git
 ).each do |p|
@@ -80,7 +76,7 @@ end
 
 # scripts
 #
-%w(osmosis.sh osm2pgsql.sh coastlines.sh).each do |t|
+%w(osmconvert.sh osm2pgsql.sh coastlines.sh).each do |t|
   template "#{node[:metroextractor][:setup][:scriptsdir]}/#{t}" do
     owner   node[:metroextractor][:user][:id]
     source  "#{t}.erb"

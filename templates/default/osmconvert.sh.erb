@@ -1,0 +1,6 @@
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) -%>
+<% data['regions'].each do |_, val| -%>
+osmconvert <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] %> --out-pbf -b=<%= val['bbox']['left'] %>,<%= val['bbox']['bottom'] %>,<%= val['bbox']['right'] %>,<%= val['bbox']['top'] %> -o=ex/<%= city %>.osm.pbf ><%= node[:metroextractor][:setup][:basedir] %>/logs/osmconvert_<%= city %>.log 2>&1
+<% end %>
