@@ -21,7 +21,7 @@ describe 'metroextractor::extracts' do
     expect(chef_run).to run_bash('osmconvert').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      code:         "    parallel -j 1 -a /opt/metroextractor-scripts/osmconvert.sh --joblog /mnt/metro/logs/parallel_osmosis.log\n"
+      code:         "    parallel -j 1 -a /opt/metroextractor-scripts/osmconvert.sh --joblog /mnt/metro/logs/parallel_osmosis.log\n",
       timeout:      172_800
     )
   end
