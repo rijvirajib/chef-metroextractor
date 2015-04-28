@@ -24,6 +24,7 @@ describe 'metroextractor::setup' do
       build-essential
       gdal-bin
       parallel
+      osmctools
       zip
       git
     ).each do |p|
@@ -48,7 +49,6 @@ describe 'metroextractor::setup' do
 
     %w(
       osm2pgsql::default
-      osmosis::default
     ).each do |r|
       it "should include the #{r} recipe" do
         expect(chef_run).to include_recipe r
@@ -150,11 +150,11 @@ describe 'metroextractor::setup' do
     )
   end
 
-  it 'should create template /opt/metroextractor-scripts/osmosis.sh' do
-    expect(chef_run).to create_template('/opt/metroextractor-scripts/osmosis.sh').with(
+  it 'should create template /opt/metroextractor-scripts/osmconvert.sh' do
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/osmconvert.sh').with(
       owner:  'metro',
       mode:   0755,
-      source: 'osmosis.sh.erb'
+      source: 'osmconvert.sh.erb'
     )
   end
 
