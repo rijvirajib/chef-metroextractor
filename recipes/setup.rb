@@ -76,6 +76,7 @@ end
 #
 package 'libprotobuf-c0-dev'
 package 'zlib1g-dev'
+package 'clang'
 
 # vex
 #
