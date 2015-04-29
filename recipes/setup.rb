@@ -68,7 +68,7 @@ directory node[:metroextractor][:vex][:db] do
 end
 
 # scripts
-%w(extracts.sh shapes.sh coastlines.sh).each do |t|
+%w(extracts_vex.sh extracts_osmconvert.sh shapes.sh coastlines.sh).each do |t|
   template "#{node[:metroextractor][:setup][:scriptsdir]}/#{t}" do
     owner   node[:metroextractor][:user][:id]
     source  "#{t}.erb"

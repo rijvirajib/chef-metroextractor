@@ -8,6 +8,9 @@ default[:metroextractor][:shapes][:process]           = true
 default[:metroextractor][:extracts][:process]         = true
 default[:metroextractor][:coastlines][:process]       = true
 
+# extracts backend
+default[:metroextractor][:extracts][:backend]         = 'vex' # choose vex or osmconvert
+
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
