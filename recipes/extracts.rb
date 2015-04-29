@@ -7,7 +7,7 @@ bash 'osmconvert planet' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
   code <<-EOH
-    osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m
+    osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m > #{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
   EOH
   timeout node[:metroextractor][:extracts][:osmconvert_timeout]
 end
