@@ -9,7 +9,6 @@ when 'vex'
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
     timeout   node[:metroextractor][:vex][:db_timeout]
-    only_if   { node[:metroextractor][:extracts][:process] == true }
     command <<-EOH
       vex #{node[:metroextractor][:vex][:db]} \
         #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} \
@@ -21,7 +20,6 @@ when 'vex'
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
     timeout   node[:metroextractor][:extracts][:extracts_timeout]
-    only_if   { node[:metroextractor][:extracts][:process] == true }
     command <<-EOH
       parallel --jobs #{node[:metroextractor][:vex][:jobs]} \
         -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts_vex.sh \
