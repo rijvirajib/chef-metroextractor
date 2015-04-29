@@ -19,8 +19,8 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   notifies  :run, 'execute[download planet]',   :immediately
   notifies  :run, 'ruby_block[verify md5]',     :immediately
   notifies  :run, 'execute[update planet]',     :immediately if node[:metroextractor][:planet][:update] == true
-  notifies  :run, 'execute[create vexdb]',      :immediately if node[:metroextractor][:extracts][:backend] == 'vex'
-  notifies  :run, 'execute[osmconvert planet]', :immediately if node[:metroextractor][:extracts][:backend] == 'osmconvert'
+  notifies  :run, 'execute[create vexdb]',      :immediately if node[:metroextractor][:extracts][:backend] == 'vex' && node[:metroextractor][:planet][:update] != true
+  notifies  :run, 'execute[osmconvert planet]', :immediately if node[:metroextractor][:extracts][:backend] == 'osmconvert' && node[:metroextractor][:planet][:update] != true
 end
 
 execute 'update planet' do
@@ -34,6 +34,8 @@ execute 'update planet' do
     mv updated-#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:file]}
   EOH
   timeout node[:metroextractor][:planet_update][:timeout]
+  notifies  :run, 'execute[create vexdb]',      :immediately if node[:metroextractor][:extracts][:backend] == 'vex'
+  notifies  :run, 'execute[osmconvert planet]', :immediately if node[:metroextractor][:extracts][:backend] == 'osmconvert'
 end
 
 execute 'download planet' do
