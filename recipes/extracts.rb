@@ -6,6 +6,7 @@
 case node[:metroextractor][:extracts][:backend]
 when 'vex'
   execute 'create vexdb' do
+    action    :nothing
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
     timeout   node[:metroextractor][:vex][:db_timeout]
