@@ -22,8 +22,12 @@ end
 
 execute 'download planet' do
   action  :nothing
-  command "wget --quiet -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}"
   user    node[:metroextractor][:user][:id]
+  command <<-EOH
+    wget --quiet \
+      -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} \
+      #{node[:metroextractor][:planet][:url]}
+  EOH
 end
 
 ruby_block 'verify md5' do

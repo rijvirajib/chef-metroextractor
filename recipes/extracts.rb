@@ -9,7 +9,9 @@ execute 'create vexdb' do
   timeout   node[:metroextractor][:vex][:db_timeout]
   only_if   { node[:metroextractor][:extracts][:process] == true }
   command <<-EOH
-    vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
+    vex #{node[:metroextractor][:vex][:db]} \
+      #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} \
+      >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
   EOH
 end
 
@@ -19,6 +21,8 @@ execute 'create extracts' do
   timeout   node[:metroextractor][:extracts][:extracts_timeout]
   only_if   { node[:metroextractor][:extracts][:process] == true }
   command <<-EOH
-    parallel --jobs #{node[:metroextractor][:vex][:jobs]} -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
+    parallel --jobs #{node[:metroextractor][:vex][:jobs]} \
+      -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh \
+      --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
   EOH
 end

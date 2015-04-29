@@ -78,8 +78,6 @@ package 'libprotobuf-c0-dev'
 package 'zlib1g-dev'
 package 'clang'
 
-# vex
-#
 ark 'vex' do
   owner        'root'
   url          node[:metroextractor][:vex][:url]
