@@ -8,7 +8,7 @@ bash 'create vexdb' do
   cwd       node[:metroextractor][:setup][:basedir]
   timeout   node[:metroextractor][:vex][:db_timeout]
   code <<-EOH
-    #{node[:metroextractor][:vex][:installdir]}/vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
+    vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:planet][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
   EOH
   only_if   { node[:metroextractor][:extracts][:process] == true }
 end
