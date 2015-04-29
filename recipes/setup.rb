@@ -43,29 +43,31 @@ link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
 end
 
 # vex
-package 'libprotobuf-c0-dev'
-package 'zlib1g-dev'
-package 'clang'
+if node[:metroextractor][:extracts][:backend] == 'vex'
+  package 'libprotobuf-c0-dev'
+  package 'zlib1g-dev'
+  package 'clang'
 
-ark 'vex' do
-  owner        'root'
-  url          node[:metroextractor][:vex][:url]
-  version      node[:metroextractor][:vex][:version]
-  prefix_root  node[:metroextractor][:vex][:installdir]
-  has_binaries ['vex']
-  notifies     :run, 'execute[build vex]', :immediately
-end
+  ark 'vex' do
+    owner        'root'
+    url          node[:metroextractor][:vex][:url]
+    version      node[:metroextractor][:vex][:version]
+    prefix_root  node[:metroextractor][:vex][:installdir]
+    has_binaries ['vex']
+    notifies     :run, 'execute[build vex]', :immediately
+  end
 
-execute 'build vex' do
-  action  :nothing
-  cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
-  command "make -j#{node[:cpu][:total]}"
-end
+  execute 'build vex' do
+    action  :nothing
+    cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
+    command "make -j#{node[:cpu][:total]}"
+  end
 
-directory node[:metroextractor][:vex][:db] do
-  recursive true
-  owner     node[:metroextractor][:user][:id]
-  not_if    { node[:metroextractor][:vex][:db] == 'memory' }
+  directory node[:metroextractor][:vex][:db] do
+    recursive true
+    owner     node[:metroextractor][:user][:id]
+    not_if    { node[:metroextractor][:vex][:db] == 'memory' }
+  end
 end
 
 # scripts
