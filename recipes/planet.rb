@@ -18,6 +18,7 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   mode      0644
   notifies  :run, 'execute[download planet]', :immediately
   notifies  :run, 'ruby_block[verify md5]',   :immediately
+  notifies  :run, 'execute[convert planet]',  :immediately
 end
 
 execute 'download planet' do

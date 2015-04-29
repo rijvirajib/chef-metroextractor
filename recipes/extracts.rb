@@ -4,12 +4,13 @@
 #
 
 execute 'osmconvert planet' do
-  user node[:metroextractor][:user][:id]
-  cwd  node[:metroextractor][:setup][:basedir]
+  action  :nothing
+  user    node[:metroextractor][:user][:id]
+  cwd     node[:metroextractor][:setup][:basedir]
+  timeout node[:metroextractor][:extracts][:osmconvert_timeout]
   code <<-EOH
     osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m > #{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
   EOH
-  timeout node[:metroextractor][:extracts][:osmconvert_timeout]
 end
 
 execute 'osmconvert cities' do
