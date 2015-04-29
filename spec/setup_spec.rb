@@ -21,6 +21,9 @@ describe 'metroextractor::setup' do
     end
 
     %w(
+      libprotobuf-c0-dev
+      clang
+      zlib1g-dev
       build-essential
       gdal-bin
       parallel
@@ -34,6 +37,18 @@ describe 'metroextractor::setup' do
 
     it 'should ark install package imposm' do
       expect(chef_run).to install_ark 'imposm3'
+    end
+
+    it 'should ark install vex' do
+      expect(chef_run).to install_ark 'vex'
+    end
+
+    it 'should build vex' do
+      expect(chef_run).to run_execute 'build vex'
+    end
+
+    it 'should create cookbook file mapping.json' do
+      expect(chef_run).to create_cookbook_file '/opt/metroextractor-scripts/mapping.json'
     end
   end
 
