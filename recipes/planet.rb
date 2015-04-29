@@ -18,7 +18,7 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   mode      0644
   notifies  :run, 'execute[download planet]',   :immediately
   notifies  :run, 'ruby_block[verify md5]',     :immediately
-  notifies  :run, 'execute[planet_update]',     :immediately if node[:metroextractor][:planet][:update] == true
+  notifies  :run, 'execute[update planet]',     :immediately if node[:metroextractor][:planet][:update] == true
   notifies  :run, 'execute[create vexdb]',      :immediately if node[:metroextractor][:extracts][:backend] == 'vex'
   notifies  :run, 'execute[osmconvert planet]', :immediately if node[:metroextractor][:extracts][:backend] == 'osmconvert'
 end
