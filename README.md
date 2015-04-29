@@ -21,7 +21,7 @@ Imposm shapfiles are generated using default projections. We use imposm3, which 
 
 What hardware do I need?
 ------------------------
-On AWS, a c3.8xl (60GB RAM and at least 75GB of fast disk), will result in the entire process taking ~4 hours.
+On AWS, a r3.4xl (120GB RAM and at least 75GB of fast disk), will result in the entire process taking ~4 hours. You can use smaller instances and choose to use a non-memory store vex DB, but you'll benefit from more memory for caching.
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](https://mapzen.com/metro-extracts/)
