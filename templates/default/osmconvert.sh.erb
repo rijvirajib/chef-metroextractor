@@ -3,6 +3,6 @@
 <% data = JSON.parse(json) -%>
 <% data['regions'].each do |_, val| -%>
   <% val['cities'].keys.each do |city| -%>
-osmconvert <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> --out-pbf -b=<%= val['bbox']['left'] %>,<%= val['bbox']['bottom'] %>,<%= val['bbox']['right'] %>,<%= val['bbox']['top'] %> -o=ex/<%= city %>.osm.pbf ><%= node[:metroextractor][:setup][:basedir] %>/logs/osmconvert_<%= city %>.log 2>&1
+osmconvert <%= node[:metroextractor][:setup][:basedir] %>/planet.o5m --out-pbf -b=<%= val['bbox']['left'] %>,<%= val['bbox']['bottom'] %>,<%= val['bbox']['right'] %>,<%= val['bbox']['top'] %> -o=ex/<%= city %>.osm.pbf ><%= node[:metroextractor][:setup][:basedir] %>/logs/osmconvert_<%= city %>.log 2>&1
   <% end %>
 <% end %>

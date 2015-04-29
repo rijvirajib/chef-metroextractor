@@ -3,7 +3,16 @@
 # Recipe:: extracts
 #
 
-bash 'osmconvert' do
+bash 'osmconvert planet' do
+  user node[:metroextractor][:user][:id]
+  cwd  node[:metroextractor][:setup][:basedir]
+  code <<-EOH
+    osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m
+  EOH
+  timeout node[:metroextractor][:extracts][:osmconvert_timeout]
+end
+
+bash 'osmconvert cities' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
   code <<-EOH
