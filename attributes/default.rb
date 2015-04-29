@@ -53,13 +53,13 @@ default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 # extracts
 default[:metroextractor][:vex][:version]              = '0.0.3'
 default[:metroextractor][:vex][:installdir]           = '/usr/local'
-default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total] / 2
+default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total]
 default[:metroextractor][:vex][:db_timeout]           = 7200
 default[:metroextractor][:vex][:db]                   = "#{node[:metroextractor][:setup][:basedir]}/vex_db"
 default[:metroextractor][:vex][:url]                  = "https://github.com/mapzen/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 
 default[:metroextractor][:osmconvert][:timeout]       = 172_800
-default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total] / 2
+default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]       = 12
