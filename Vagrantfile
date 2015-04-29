@@ -69,6 +69,9 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       'metroextractor' => {
+        'extracts' => {
+          'process' => true
+        },
         'shapes' => {
           'process' => false
         },

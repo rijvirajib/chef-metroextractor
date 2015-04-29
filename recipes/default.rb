@@ -9,10 +9,13 @@
   metroextractor::user
   metroextractor::setup
   metroextractor::planet
+  metroextractor::extracts
+  metroextractor::shapes
+  metroextractor::coastlines
 ).each do |r|
   include_recipe r
 end
 
-include_recipe 'metroextractor::extracts'   if node[:metroextractor][:extracts][:process]   == true
-include_recipe 'metroextractor::shapes'     if node[:metroextractor][:shapes][:process]     == true
-include_recipe 'metroextractor::coastlines' if node[:metroextractor][:coastlines][:process] == true
+file node[:metroextractor][:data][:trigger_file] do
+  action :delete
+end

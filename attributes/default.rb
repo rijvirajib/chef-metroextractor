@@ -8,8 +8,10 @@ default[:metroextractor][:shapes][:process]           = true
 default[:metroextractor][:extracts][:process]         = true
 default[:metroextractor][:coastlines][:process]       = true
 
+default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_data_trigger'
+
 # extracts backend
-default[:metroextractor][:extracts][:backend]         = 'vex' # choose vex or osmconvert
+default[:metroextractor][:extracts][:backend]         = 'osmconvert' # choose vex or osmconvert
 
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
