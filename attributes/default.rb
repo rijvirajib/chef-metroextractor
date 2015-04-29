@@ -49,12 +49,15 @@ default[:metroextractor][:planet][:update]            = false  # whether to upda
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
-default[:metroextractor][:vex][:version]               = '0.0.2'
-default[:metroextractor][:vex][:url]                   = "https://github.com/heffergm/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
-default[:metroextractor][:vex][:installdir]            = '/usr/local'
+default[:metroextractor][:vex][:version]              = '0.0.2'
+default[:metroextractor][:vex][:url]                  = "https://github.com/heffergm/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
+default[:metroextractor][:vex][:installdir]           = '/usr/local'
 default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total]
 default[:metroextractor][:vex][:db]                   = 'memory'
 default[:metroextractor][:vex][:db_timeout]           = 7200
+
+default[:metroextractor][:osmconvert][:timeout]       = 172_800
+default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]       = 12

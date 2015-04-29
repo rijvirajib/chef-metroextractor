@@ -34,7 +34,7 @@ when 'osmconvert'
     action  :nothing
     user    node[:metroextractor][:user][:id]
     cwd     node[:metroextractor][:setup][:basedir]
-    timeout node[:metroextractor][:extracts][:osmconvert_timeout]
+    timeout node[:metroextractor][:osmconvert][:timeout]
     command <<-EOH
       osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m \
         > #{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
@@ -44,10 +44,10 @@ when 'osmconvert'
   execute 'osmconvert cities' do
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
-    timeout   node[:metroextractor][:extracts][:osmconvert_timeout]
+    timeout   node[:metroextractor][:osmconvert][:timeout]
     notifies  :run, 'execute[fix osmconvert perms]', :immediately
     command <<-EOH
-      parallel -j #{node[:metroextractor][:extracts][:osmconvert_jobs]} \
+      parallel -j #{node[:metroextractor][:osmconvert][:jobs]} \
         -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts_osmconvert.sh \
         --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmconvert.log
     EOH
