@@ -3,7 +3,7 @@
 # Recipe:: extracts
 #
 
-bash 'osmconvert planet' do
+execute 'osmconvert planet' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
   code <<-EOH
@@ -12,12 +12,20 @@ bash 'osmconvert planet' do
   timeout node[:metroextractor][:extracts][:osmconvert_timeout]
 end
 
-bash 'osmconvert cities' do
+execute 'osmconvert cities' do
   user node[:metroextractor][:user][:id]
   cwd  node[:metroextractor][:setup][:basedir]
   code <<-EOH
     parallel -j #{node[:metroextractor][:extracts][:osmconvert_jobs]} -a #{node[:metroextractor][:setup][:scriptsdir]}/osmconvert.sh --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmconvert.log
   EOH
-  timeout node[:metroextractor][:extracts][:osmconvert_timeout]
-  only_if { node[:metroextractor][:extracts][:process] == true }
+  timeout   node[:metroextractor][:extracts][:osmconvert_timeout]
+  notifies  :run, 'execute[fix osmconvert perms]', :immediately
+  only_if   { node[:metroextractor][:extracts][:process] == true }
+end
+
+execute 'fix osmconvert perms' do
+  action  :nothing
+  user    node[:metroextractor][:user][:id]
+  cwd     node[:metroextractor][:setup][:basedir]
+  code    'chmod 644 ex/*'
 end
