@@ -17,17 +17,10 @@ describe 'metroextractor::extracts' do
     end.converge(described_recipe)
   end
 
-  it 'should define the lockfile' do
-    expect(chef_run).to_not create_file '/mnt/metro/.osmosis.lock'
+  it 'should run create vexdb' do
+    expect(chef_run).to run_execute('create vexdb')
   end
-
-  it 'should run osmosis' do
-    expect(chef_run).to run_bash('osmosis').with(
-      user:         'metro',
-      cwd:          '/mnt/metro',
-      environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms15G -Xmx15G' },
-      code:         "    parallel -j 6 -a /opt/metroextractor-scripts/osmosis.sh -d ';' --joblog /mnt/metro/logs/parallel_osmosis.log\n",
-      timeout:      172_800
-    )
+  it 'should run create extracts' do
+    expect(chef_run).to run_execute('create extracts')
   end
 end
