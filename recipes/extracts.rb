@@ -6,7 +6,7 @@
 case node[:metroextractor][:extracts][:backend]
 when 'vex'
   execute 'create vexdb' do
-    action    :nothing
+    action    :nothing # triggered by planet update
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
     timeout   node[:metroextractor][:vex][:db_timeout]
@@ -30,7 +30,7 @@ when 'vex'
 
 when 'osmconvert'
   execute 'osmconvert planet' do
-    action  :nothing
+    action  :nothing # triggered by planet update
     user    node[:metroextractor][:user][:id]
     cwd     node[:metroextractor][:setup][:basedir]
     timeout node[:metroextractor][:osmconvert][:timeout]
@@ -40,7 +40,7 @@ when 'osmconvert'
     EOH
   end
 
-  execute 'osmconvert cities' do
+  execute 'create extracts' do
     user      node[:metroextractor][:user][:id]
     cwd       node[:metroextractor][:setup][:basedir]
     timeout   node[:metroextractor][:osmconvert][:timeout]
