@@ -43,10 +43,6 @@ describe 'metroextractor::setup' do
       expect(chef_run).to install_ark 'vex'
     end
 
-    it 'should build vex' do
-      expect(chef_run).to run_execute 'build vex'
-    end
-
     it 'should create cookbook file mapping.json' do
       expect(chef_run).to create_cookbook_file '/opt/metroextractor-scripts/mapping.json'
     end
