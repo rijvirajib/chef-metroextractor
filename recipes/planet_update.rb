@@ -3,8 +3,6 @@
 # Recipe:: planet_update
 #
 
-package 'osmctools'
-
 execute 'update planet' do
   user    node[:metroextractor][:user][:id]
   cwd     node[:metroextractor][:setup][:basedir]

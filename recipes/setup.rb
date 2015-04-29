@@ -7,6 +7,7 @@ include_recipe 'osm2pgsql::default'
 
 %w(
   build-essential
+  osmctools
   gdal-bin
   parallel
   zip
