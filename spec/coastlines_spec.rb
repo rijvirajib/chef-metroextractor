@@ -22,26 +22,26 @@ describe 'metroextractor::coastlines' do
   end
 
   it 'should wget water polygons' do
-    expect(chef_run).to run_bash('wget water polygons').with(
+    expect(chef_run).to run_execute('wget water polygons').with(
       user: 'metro',
       cwd:  '/mnt/metro',
-      code: "    wget --quiet -O water-polygons-split-4326.zip http://data.openstreetmapdata.com/water-polygons-split-4326.zip && unzip water-polygons-split-4326.zip\n"
+      command: "    wget --quiet -O water-polygons-split-4326.zip       http://data.openstreetmapdata.com/water-polygons-split-4326.zip &&       unzip water-polygons-split-4326.zip\n"
     )
   end
 
   it 'should wget land polygons' do
-    expect(chef_run).to run_bash('wget land polygons').with(
+    expect(chef_run).to run_execute('wget land polygons').with(
       user: 'metro',
       cwd:  '/mnt/metro',
-      code: "    wget --quiet -O land-polygons-split-4326.zip http://data.openstreetmapdata.com/land-polygons-split-4326.zip && unzip land-polygons-split-4326.zip\n"
+      command: "    wget --quiet -O land-polygons-split-4326.zip       http://data.openstreetmapdata.com/land-polygons-split-4326.zip &&       unzip land-polygons-split-4326.zip\n"
     )
   end
 
   it 'should generate coastlines' do
-    expect(chef_run).to run_bash('generate coastlines').with(
+    expect(chef_run).to run_execute('generate coastlines').with(
       user: 'metro',
       cwd:  '/mnt/metro',
-      code: "    /opt/metroextractor-scripts/coastlines.sh >/mnt/metro/logs/coastlines.log 2>&1\n"
+      command: "    /opt/metroextractor-scripts/coastlines.sh       >/mnt/metro/logs/coastlines.log 2>&1\n"
     )
   end
 end

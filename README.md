@@ -16,16 +16,12 @@ Projections
 -----------
 GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
 
-Imposm shapfiles are generated using default projections. As the code allows for the use of either imposm2 or imposm3, that currently means:
-  * EPSG:3857 for imposm3
-  * EPSG:90013 for imposm2
-
-Mapzen is using imposm3 to generate these shapefiles, so the imposm shapefiles found at our [metro extracts](https://mapzen.com/metro-extracts/) page
-are using EPSG:3857.
+Imposm shapfiles are generated using default projections. We use imposm3, which currently means:
+  * EPSG:3857
 
 What hardware do I need?
 ------------------------
-On AWS, a r3.4xl (124GB RAM and at least 75GB of fast disk), will result in the entire process taking ~17 hours.
+On AWS, a c3.8xl (60GB RAM and at least 75GB of fast disk), will result in the entire process taking ~4 hours.
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](https://mapzen.com/metro-extracts/)
