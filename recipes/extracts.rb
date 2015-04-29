@@ -11,7 +11,6 @@ execute 'create vexdb' do
   command <<-EOH
     vex #{node[:metroextractor][:vex][:db]} #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} >#{node[:metroextractor][:setup][:basedir]}/logs/create_vexdb.log 2>&1
   EOH
-  only_if { node[:metroextractor][:extracts][:process] == true }
 end
 
 execute 'create extracts' do
@@ -22,5 +21,4 @@ execute 'create extracts' do
   command <<-EOH
     parallel --jobs #{node[:metroextractor][:vex][:jobs]} -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
   EOH
-  only_if { node[:metroextractor][:extracts][:process] == true }
 end
