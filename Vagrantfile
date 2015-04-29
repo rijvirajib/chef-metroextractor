@@ -69,6 +69,12 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       'metroextractor' => {
+        'shapes' => {
+          'process' => false
+        },
+        'coastlines' => {
+          'process' => false
+        },
         'planet' => {
           'url' => 'http://download.geofabrik.de/north-america/greenland-latest.osm.pbf'
         }
