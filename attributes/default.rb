@@ -47,9 +47,9 @@ default[:metroextractor][:planet][:update]            = false  # whether to upda
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
-default[:metroextractor][:vex][:installdir]           = "#{node[:metroextractor][:setup][:basedir]}/vex"
-default[:metroextractor][:vex][:repo]                 = 'https://github.com/conveyal/vanilla-extract'
-default[:metroextractor][:vex][:revision]             = 'master'
+default[:metroextractor][:vex][:version]               = '0.0.2'
+default[:metroextractor][:vex][:url]                   = "https://github.com/heffergm/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
+default[:metroextractor][:vex][:installdir]            = '/usr/local'
 default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total]
 default[:metroextractor][:vex][:db]                   = 'memory'
 default[:metroextractor][:vex][:db_timeout]           = 7200

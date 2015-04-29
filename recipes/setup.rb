@@ -77,17 +77,20 @@ end
 package 'libprotobuf-c0-dev'
 package 'zlib1g-dev'
 
-git node[:metroextractor][:vex][:installdir] do
-  action      :sync
-  user        node[:metroextractor][:user][:id]
-  repository  node[:metroextractor][:vex][:repository]
-  revision    node[:metroextractor][:vex][:revision]
-  notifies    :run, 'execute[build vex]', :immediately
+# vex
+#
+ark 'vex' do
+  owner        'root'
+  url          node[:metroextractor][:vex][:url]
+  version      node[:metroextractor][:vex][:version]
+  prefix_root  node[:metroextractor][:vex][:installdir]
+  has_binaries ['vex']
+  notifies     :run, 'execute[build vex]', :immediately
 end
 
 execute 'build vex' do
   action  :nothing
-  cwd     node[:metroextractor][:vex][:installdir]
+  cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
   command "make -j#{node[:cpu][:total]}"
 end
 
