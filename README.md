@@ -21,7 +21,12 @@ Imposm shapfiles are generated using default projections. We use imposm3, which 
 
 What hardware do I need?
 ------------------------
-On AWS, a r3.4xl (120GB RAM and at least 75GB of fast disk), will result in the entire process taking ~4 hours. You can use smaller instances and choose to use a non-memory store vex DB, but you'll benefit from more memory for caching.
+This depends on a few factors:
+  - what backend processing system for extracts do you want to use? We support vex and osmconvert.
+  - if you're using vex, do you have enough memory to store the planet in RAM?
+  - if osmconvert, how many cores do you have and how fast are they?
+
+The short version is that this could take anywhere from a few hours to days depending on setup and hardware .
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](https://mapzen.com/metro-extracts/)
@@ -42,7 +47,6 @@ Supported Platforms
 -------------------
 Tested and supported on the following platforms:
 
-* Ubuntu 12.04LTS
 * Ubuntu 14.04LTS
 
 Requirements
@@ -55,7 +59,7 @@ Attributes
 
 Dependencies
 -----------
-apt, ark, osm2pgsql, osmosis postgresql, python, user
+apt, ark, osm2pgsql, postgresql, python, user
 
 Vagrant Environment
 ===================
