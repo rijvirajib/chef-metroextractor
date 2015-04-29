@@ -25,7 +25,7 @@ describe 'metroextractor::coastlines' do
     expect(chef_run).to run_execute('wget water polygons').with(
       user: 'metro',
       cwd:  '/mnt/metro',
-      command: "    wget --quiet -O water-polygons-split-4326.zip       http://data.openstreetmapdata.com/water-polygons-split-4326.zip &&       unzip water-polygons-split-4326.zip\n"
+      command: "    wget --quiet -O water-polygons-split-4326.zip       http://data.openstreetmapdata.com/water-polygons-split-4326.zip &&\n      unzip water-polygons-split-4326.zip\n"
     )
   end
 
@@ -33,7 +33,7 @@ describe 'metroextractor::coastlines' do
     expect(chef_run).to run_execute('wget land polygons').with(
       user: 'metro',
       cwd:  '/mnt/metro',
-      command: "    wget --quiet -O land-polygons-split-4326.zip       http://data.openstreetmapdata.com/land-polygons-split-4326.zip &&       unzip land-polygons-split-4326.zip\n"
+      command: "    wget --quiet -O land-polygons-split-4326.zip       http://data.openstreetmapdata.com/land-polygons-split-4326.zip &&\n      unzip land-polygons-split-4326.zip\n"
     )
   end
 

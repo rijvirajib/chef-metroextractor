@@ -8,7 +8,7 @@ execute 'wget water polygons' do
   cwd     node[:metroextractor][:setup][:basedir]
   command <<-EOH
     wget --quiet -O #{node[:coastlines][:water_polygons][:file]} \
-      #{node[:coastlines][:water_polygons][:url]} && \
+      #{node[:coastlines][:water_polygons][:url]} &&
       unzip #{node[:coastlines][:water_polygons][:file]}
   EOH
   not_if  { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/#{node[:coastlines][:water_polygons][:file]}") }
@@ -19,7 +19,7 @@ execute 'wget land polygons' do
   cwd     node[:metroextractor][:setup][:basedir]
   command <<-EOH
     wget --quiet -O #{node[:coastlines][:land_polygons][:file]} \
-      #{node[:coastlines][:land_polygons][:url]} && \
+      #{node[:coastlines][:land_polygons][:url]} &&
       unzip #{node[:coastlines][:land_polygons][:file]}
   EOH
   not_if { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/#{node[:coastlines][:land_polygons][:file]}") }

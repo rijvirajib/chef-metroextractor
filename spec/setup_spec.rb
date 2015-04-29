@@ -23,6 +23,7 @@ describe 'metroextractor::setup' do
     %w(
       libprotobuf-c0-dev
       clang
+      osmctools
       zlib1g-dev
       build-essential
       gdal-bin
