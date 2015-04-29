@@ -73,11 +73,19 @@ describe 'metroextractor::setup' do
     )
   end
 
-  it 'should create template /opt/metroextractor-scripts/extracts.sh' do
-    expect(chef_run).to create_template('/opt/metroextractor-scripts/extracts.sh').with(
+  it 'should create template /opt/metroextractor-scripts/extracts_vex.sh' do
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/extracts_vex.sh').with(
       owner:  'metro',
       mode:   0755,
-      source: 'extracts.sh.erb'
+      source: 'extracts_vex.sh.erb'
+    )
+  end
+
+  it 'should create template /opt/metroextractor-scripts/extracts_osmconvert.sh' do
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/extracts_osmconvert.sh').with(
+      owner:  'metro',
+      mode:   0755,
+      source: 'extracts_osmconvert.sh.erb'
     )
   end
 
