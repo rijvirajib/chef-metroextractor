@@ -3,6 +3,9 @@
 # Attributes:: default
 #
 
+# if you want to pass json directly, rather than use the git repo
+default[:metroextractor][:json]                       = nil
+
 # the following are booleans and tell the cookbook whether or not
 #   we should produce certain types of data. Note that in order to produce
 #   shapes, you MUST procuce extracts, as the former is constructed from
