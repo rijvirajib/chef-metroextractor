@@ -46,7 +46,7 @@ end
 
 file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
   owner     node[:metroextractor][:user][:id]
-  content   node[:metroextractor][:json] 
+  content   node[:metroextractor][:json]
   only_if   { node[:metroextractor][:json] }
 end
 
