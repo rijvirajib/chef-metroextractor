@@ -71,6 +71,7 @@ end
     owner   node[:metroextractor][:user][:id]
     source  "#{t}.erb"
     mode    0755
+    only_if { ::File.exist?("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") }
   end
 end
 
