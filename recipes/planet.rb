@@ -12,12 +12,13 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
+  action    :create_if_missing
   backup    false
   source    "#{node[:metroextractor][:planet][:url]}.md5"
   mode      0644
-  notifies  :run, 'execute[download planet]',   :immediately
-  notifies  :run, 'ruby_block[verify md5]',     :immediately
-  notifies  :run, 'execute[osmconvert planet]', :immediately
+  notifies  :create_if_missing, 'execute[download planet]',   :immediately
+  notifies  :run,               'ruby_block[verify md5]',     :immediately
+  notifies  :run,               'execute[osmconvert planet]', :immediately
 end
 
 execute 'download planet' do
