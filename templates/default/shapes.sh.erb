@@ -80,7 +80,7 @@ declare -a cities=(
 <% require 'json' -%>
 <% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
 <% data = JSON.parse(json) %>
-<% json['cities'].keys.each do |city| -%>
+<% data['cities'].keys.each do |city| -%>
 '<%= city %>'
 <% end -%>
 )
