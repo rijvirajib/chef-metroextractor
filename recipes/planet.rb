@@ -3,10 +3,6 @@
 # Recipe:: planet
 #
 
-file node[:metroextractor][:data][:trigger_file] do
-  action :nothing
-end
-
 # override tempfile location so the planet download
 #   temp file goes somewhere with enough space
 ENV['TMP'] = node[:metroextractor][:setup][:basedir]
@@ -19,9 +15,9 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   backup    false
   source    "#{node[:metroextractor][:planet][:url]}.md5"
   mode      0644
-  notifies  :run, 'execute[download planet]',                                 :immediately
-  notifies  :run, 'ruby_block[verify md5]',                                   :immediately
-  notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]",  :immediately
+  notifies  :run, 'execute[download planet]',   :immediately
+  notifies  :run, 'ruby_block[verify md5]',     :immediately
+  notifies  :run, 'execute[osmconvert planet]', :immediately
 end
 
 execute 'download planet' do
@@ -47,4 +43,15 @@ ruby_block 'verify md5' do
       abort
     end
   end
+end
+
+execute 'osmconvert planet' do
+  action  :nothing
+  user    node[:metroextractor][:user][:id]
+  cwd     node[:metroextractor][:setup][:basedir]
+  timeout node[:metroextractor][:osmconvert][:timeout]
+  command <<-EOH
+    osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m \
+      >#{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
+  EOH
 end

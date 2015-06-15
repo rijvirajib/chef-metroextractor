@@ -3,18 +3,6 @@
 # Recipe:: extracts
 #
 
-execute 'osmconvert planet' do
-  user    node[:metroextractor][:user][:id]
-  cwd     node[:metroextractor][:setup][:basedir]
-  timeout node[:metroextractor][:osmconvert][:timeout]
-  command <<-EOH
-    osmconvert #{node[:metroextractor][:planet][:file]} -o=planet.o5m \
-      >#{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
-  EOH
-  notifies :delete, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
-  only_if { node[:metroextractor][:process][:extracts] == true && ::File.exist?(node[:metroextractor][:data][:trigger_file]) }
-end
-
 execute 'create extracts' do
   user      node[:metroextractor][:user][:id]
   cwd       node[:metroextractor][:setup][:basedir]
