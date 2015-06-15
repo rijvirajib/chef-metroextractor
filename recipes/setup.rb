@@ -38,33 +38,6 @@ file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
   only_if   { node[:metroextractor][:json] }
 end
 
-# vex
-if node[:metroextractor][:extracts][:backend] == 'vex'
-  package 'libprotobuf-c0-dev'
-  package 'protobuf-c-compiler'
-  package 'zlib1g-dev'
-  package 'clang'
-
-  ark 'vex' do
-    owner        'root'
-    url          node[:metroextractor][:vex][:url]
-    version      node[:metroextractor][:vex][:version]
-    prefix_root  node[:metroextractor][:vex][:installdir]
-    has_binaries ['vex']
-    notifies     :run, 'execute[build vex]', :immediately
-  end
-
-  execute 'build vex' do
-    action  :nothing
-    cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
-    command <<-EOH
-      protoc-c fileformat.proto --c_out=.
-      protoc-c osmformat.proto --c_out=.
-      make -j#{node[:cpu][:total]}
-    EOH
-  end
-end
-
 # scripts
 %w(extracts.sh shapes.sh coastlines.sh).each do |t|
   template "#{node[:metroextractor][:setup][:scriptsdir]}/#{t}" do
