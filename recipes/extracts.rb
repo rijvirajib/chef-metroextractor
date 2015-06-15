@@ -12,7 +12,7 @@ execute 'osmconvert planet' do
       >#{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
   EOH
   notifies :delete, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
-  only_if { node[:metroextractor][:extracts][:process] == true && ::File.exist?(node[:metroextractor][:data][:trigger_file]) }
+  only_if { node[:metroextractor][:process][:extracts] == true && ::File.exist?(node[:metroextractor][:data][:trigger_file]) }
 end
 
 execute 'create extracts' do
@@ -25,7 +25,7 @@ execute 'create extracts' do
       -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts_osmconvert.sh \
       --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmconvert.log
   EOH
-  only_if { node[:metroextractor][:extracts][:process] == true }
+  only_if { node[:metroextractor][:process][:extracts] == true }
 end
 
 execute 'fix osmconvert perms' do
@@ -33,5 +33,5 @@ execute 'fix osmconvert perms' do
   user      node[:metroextractor][:user][:id]
   cwd       node[:metroextractor][:setup][:basedir]
   command   'chmod 644 ex/*'
-  only_if   { node[:metroextractor][:extracts][:process] == true }
+  only_if   { node[:metroextractor][:process][:extracts] == true }
 end

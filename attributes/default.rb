@@ -10,9 +10,9 @@ default[:metroextractor][:json]                       = nil
 #   we should produce certain types of data. Note that in order to produce
 #   shapes, you MUST procuce extracts, as the former is constructed from
 #   the latter.
-default[:metroextractor][:shapes][:process]           = false
-default[:metroextractor][:extracts][:process]         = false
-default[:metroextractor][:coastlines][:process]       = false
+default[:metroextractor][:process][:shapes]           = false
+default[:metroextractor][:process][:extracts]         = false
+default[:metroextractor][:process][:coastlines]       = false
 
 # when the planet is updated in full or in part, create a file off of which
 #   subsequent processing will be triggered (conversion of the planet to .o5m)
