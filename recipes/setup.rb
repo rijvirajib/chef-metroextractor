@@ -32,18 +32,6 @@ directory node[:metroextractor][:setup][:scriptsdir] do
 end
 
 # cities
-git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
-  action      :sync
-  repository  node[:metroextractor][:setup][:cities_repo]
-  revision    node[:metroextractor][:setup][:cities_branch]
-  user        node[:metroextractor][:user][:id]
-  not_if      { node[:metroextractor][:json] }
-end
-link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
-  to "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities/cities.json"
-  not_if      { node[:metroextractor][:json] }
-end
-
 file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
   owner     node[:metroextractor][:user][:id]
   content   node[:metroextractor][:json]
