@@ -48,19 +48,3 @@ ruby_block 'verify md5' do
     end
   end
 end
-
-execute 'update planet' do
-  user        node[:metroextractor][:user][:id]
-  cwd         node[:metroextractor][:setup][:basedir]
-  timeout     node[:metroextractor][:planet_update][:timeout]
-  retries     2
-  retry_delay 60
-  notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
-  command <<-EOH
-    osmupdate #{node[:metroextractor][:planet][:file]} \
-      updated-#{node[:metroextractor][:planet][:file]} &&
-    rm #{node[:metroextractor][:planet][:file]} &&
-    mv updated-#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:file]}
-  EOH
-  only_if { node[:metroextractor][:planet][:update] == true }
-end
