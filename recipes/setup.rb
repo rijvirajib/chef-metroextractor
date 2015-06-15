@@ -66,7 +66,7 @@ if node[:metroextractor][:extracts][:backend] == 'vex'
 end
 
 # scripts
-%w(extracts_vex.sh extracts_osmconvert.sh shapes.sh coastlines.sh).each do |t|
+%w(extracts.sh shapes.sh coastlines.sh).each do |t|
   template "#{node[:metroextractor][:setup][:scriptsdir]}/#{t}" do
     owner   node[:metroextractor][:user][:id]
     source  "#{t}.erb"

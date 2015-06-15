@@ -3,6 +3,10 @@
 # Recipe:: planet
 #
 
+file node[:metroextractor][:data][:trigger_file] do
+  action :nothing
+end
+
 # override tempfile location so the planet download
 #   temp file goes somewhere with enough space
 ENV['TMP'] = node[:metroextractor][:setup][:basedir]
@@ -59,8 +63,4 @@ execute 'update planet' do
     mv updated-#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:file]}
   EOH
   only_if { node[:metroextractor][:planet][:update] == true }
-end
-
-file node[:metroextractor][:data][:trigger_file] do
-  action :nothing
 end

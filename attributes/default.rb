@@ -15,12 +15,8 @@ default[:metroextractor][:extracts][:process]         = false
 default[:metroextractor][:coastlines][:process]       = false
 
 # when the planet is updated in full or in part, create a file off of which
-#   subsequent processing will be triggered: either recreation of the vex db
-#   or conversion of the planet to .o5m dependin on the backend being used.
+#   subsequent processing will be triggered (conversion of the planet to .o5m)
 default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_data_trigger'
-
-# options are 'vex' or 'osmconvert'
-default[:metroextractor][:extracts][:backend]         = 'osmconvert'
 
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
