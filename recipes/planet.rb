@@ -16,9 +16,9 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   backup    false
   source    "#{node[:metroextractor][:planet][:url]}.md5"
   mode      0644
-  notifies  :create_if_missing, 'execute[download planet]',   :immediately
-  notifies  :run,               'ruby_block[verify md5]',     :immediately
-  notifies  :run,               'execute[osmconvert planet]', :immediately
+  notifies  :run, 'execute[download planet]',   :immediately
+  notifies  :run, 'ruby_block[verify md5]',     :immediately
+  notifies  :run, 'execute[osmconvert planet]', :immediately
 end
 
 execute 'download planet' do
