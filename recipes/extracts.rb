@@ -10,8 +10,8 @@ execute 'create extracts' do
   notifies  :run, 'execute[fix osmconvert perms]', :immediately
   command <<-EOH
     parallel -j #{node[:metroextractor][:osmconvert][:jobs]} \
-      -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts_osmconvert.sh \
-      --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmconvert.log
+      -a #{node[:metroextractor][:setup][:scriptsdir]}/extracts.sh \
+      --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_extracts.log
   EOH
   only_if { node[:metroextractor][:process][:extracts] == true }
 end
