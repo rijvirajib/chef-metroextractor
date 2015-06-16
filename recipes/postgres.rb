@@ -3,6 +3,8 @@
 # Recipe:: postgres
 #
 
+# note that if you're not using the local postgres installation, you'll need to manually
+#   enable the postgis extension in your database.
 if node[:metroextractor][:postgres][:host] == 'localhost'
   package 'postgis'
 
