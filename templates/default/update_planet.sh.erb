@@ -2,8 +2,14 @@
 
 user=<%= node[:metroextractor][:user][:id] %>
 cwd=<%= node[:metroextractor][:setup][:basedir] %>
+planet_file=<%= node[:metroextractor][:planet][:file] %>
 
-osmupdate <%= node[:metroextractor][:planet][:file] %> \
-  updated-<%= node[:metroextractor][:planet][:file] %> &&
-  mv -f updated-<%= node[:metroextractor][:planet][:file] %> \
-    <%= node[:metroextractor][:planet][:file] %>
+su - ${user} -c "cd ${cwd} && \
+  osmupdate ${planet_file} \
+  updated-${planet_file} \
+  >logs/osmupdate_planet.log 2>&1 &&
+  mv -f updated-${planet_file} ${planet_file}"
+
+su - ${user} -c "cd ${cwd} && \
+  osmconvert ${planet_file} -o=planet.o5m \
+  >logs/osmconvert_planet.log 2>&1"
