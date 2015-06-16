@@ -56,3 +56,21 @@ execute 'osmconvert planet' do
       >#{node[:metroextractor][:setup][:basedir]}/logs/osmconvert_planet.log 2>&1
   EOH
 end
+
+# cron
+template "#{node[:metroextractor][:setup][:scriptsdir]}/update_planet.sh" do
+  owner   node[:metroextractor][:user][:id]
+  mode    0755
+  source  'update_planet.sh.erb' 
+end
+
+cron 'update planet' do
+  command <<-EOH
+    #{node[:metroextractor][:setup][:scriptsdir]}/update_planet.sh \
+      >#{node[:metroextractor][:setup][:basedir]}/logs/update_planet.log 2>&1
+  EOH
+  user    node[:metroextractor][:user][:id]
+  cwd     node[:metroextractor][:setup][:basedir]
+  home    node[:metroextractor][:setup][:basedir]
+  time    :midnight
+end
