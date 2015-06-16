@@ -4,7 +4,7 @@ lockfile=.planet_update.lock
 planet_file=<%= node[:metroextractor][:planet][:file] %>
 
 if [ -f ${lockfile} ]; then
-  echo "Lockfile exists, existing."
+  echo "Lockfile exists, exiting."
   exit 1
 fi
 
