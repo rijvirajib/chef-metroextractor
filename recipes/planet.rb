@@ -61,7 +61,7 @@ end
 template "#{node[:metroextractor][:setup][:scriptsdir]}/update_planet.sh" do
   owner   node[:metroextractor][:user][:id]
   mode    0755
-  source  'update_planet.sh.erb' 
+  source  'update_planet.sh.erb'
 end
 
 cron 'update planet' do
@@ -70,7 +70,8 @@ cron 'update planet' do
       >#{node[:metroextractor][:setup][:basedir]}/logs/update_planet.log 2>&1
   EOH
   user    node[:metroextractor][:user][:id]
-  cwd     node[:metroextractor][:setup][:basedir]
   home    node[:metroextractor][:setup][:basedir]
-  time    :midnight
+  hour    '5'
+  minute  '*'
+  weekday '*'
 end
