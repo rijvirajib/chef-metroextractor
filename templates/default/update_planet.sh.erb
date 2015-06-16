@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 
+lockfile=.planet_update.lock
 planet_file=<%= node[:metroextractor][:planet][:file] %>
+
+if [ -f ${lockfile} ]; then
+  echo "Lockfile exists, existing."
+  exit 1
+fi
+
+touch ${lockfile}
 
 osmupdate ${planet_file} updated-${planet_file}
 osmconvert updated-${planet_file} -o=planet_osmconvert.o5m
 
 mv -f updated-${planet_file} ${planet_file}
 mv -f planet_osmconvert.o5m planet.o5m
+
+rm ${lockfile}
