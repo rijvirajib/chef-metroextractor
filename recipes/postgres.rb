@@ -56,4 +56,5 @@ if node[:metroextractor][:postgres][:host] == 'localhost'
   end
 else
   package 'postgresql-client'
+  package 'postgis'
 end
