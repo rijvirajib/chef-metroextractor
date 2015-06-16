@@ -72,7 +72,7 @@ cron 'update planet' do
   EOH
   user    node[:metroextractor][:user][:id]
   home    node[:metroextractor][:setup][:basedir]
-  hour    '*'
+  hour    '5'
   minute  '*'
   weekday '*'
 end
