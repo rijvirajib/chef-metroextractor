@@ -29,6 +29,7 @@ execute 'download planet' do
       -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} \
       #{node[:metroextractor][:planet][:url]}
   EOH
+  timeout node[:metroextractor][:planet][:timeout]
 end
 
 ruby_block 'verify md5' do

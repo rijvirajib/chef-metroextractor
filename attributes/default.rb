@@ -49,6 +49,7 @@ default[:postgresql][:checkpoint_segments]            = '100'
 default[:postgresql][:max_connections]                = '200'
 
 # planet
+default[:metroextractor][:planet][:timeout]           = 7200
 default[:metroextractor][:planet][:url]               = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
 default[:metroextractor][:planet][:file]              = node[:metroextractor][:planet][:url].split('/').last
 
