@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
-OSMOPTS="--hstore --host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
-PGSQLOPTS="-h localhost -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
-PGSQL2SHPOPTS="-h localhost -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
+OSMOPTS="--hstore --host <%= node[:metroextractor][:postgres][:host] %> --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
+PGSQLOPTS="-h <%= node[:metroextractor][:postgres][:host] %> -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
+PGSQL2SHPOPTS="-h <%= node[:metroextractor][:postgres][:host] %> -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
 SHAPE_ENCODING="UTF-8"
 export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS SHAPE_ENCODING
 
@@ -54,7 +54,7 @@ function imposm_shapefiles
 
   mkdir shp/$slug-imposm
 
-  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
+  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@<%= node[:metroextractor][:postgres][:host] %>/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'places' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 

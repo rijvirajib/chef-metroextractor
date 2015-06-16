@@ -35,6 +35,7 @@ default[:metroextractor][:imposm][:installdir]        = '/usr/local'
 default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.1dev-20140702-ced9f92-linux-x86-64.tar.gz'
 
 # postgres
+default[:metroextractor][:postgres][:host]            = 'localhost' # setting to something other than localhost will result in the local postgres installation being skipped
 default[:metroextractor][:postgres][:db]              = 'osm'
 default[:metroextractor][:postgres][:user]            = 'osm'
 default[:metroextractor][:postgres][:password]        = 'password'
