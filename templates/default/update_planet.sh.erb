@@ -4,10 +4,10 @@ planet_file=<%= node[:metroextractor][:planet][:file] %>
 
 osmupdate ${planet_file} \
   updated-${planet_file} \
-  >logs/osmupdate_planet.log 2>&1 &&
-  mv -f updated-${planet_file} ${planet_file}
+  >logs/osmupdate_planet.log 2>&1
 
-osmconvert ${planet_file} -o=planet_convert.o5m \
+osmconvert updated-${planet_file} -o=planet_convert.o5m \
   >logs/osmconvert_planet.log 2>&1
 
+mv -f updated-${planet_file} ${planet_file}
 mv -f planet_convert.o5m ${planet_file}
