@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+user=<%= node[:metroextractor][:user][:id] %>
+cwd=<%= node[:metroextractor][:setup][:basedir] %>
+
+osmupdate <%= node[:metroextractor][:planet][:file] %> \
+  updated-<%= node[:metroextractor][:planet][:file] %> &&
+  mv -f updated-<%= node[:metroextractor][:planet][:file] %> \
+    <%= node[:metroextractor][:planet][:file] %>
