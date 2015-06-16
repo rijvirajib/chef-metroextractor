@@ -54,4 +54,6 @@ if node[:metroextractor][:postgres][:host] == 'localhost'
   service 'postgresql' do
     action :restart
   end
+else
+  package 'postgresql-client'
 end
